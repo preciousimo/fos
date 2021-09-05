@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 import json
+import datetime
 
 from .models import*
 
@@ -78,5 +79,14 @@ def updateItem(request):
     return JsonResponse('Item was added', safe=False)
 
 def processOrder(request):
-    print('Data:', request.body)
+    transaction_id = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+    
+    if request.userinfo.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        total = float(data['form']['total'])
+        order.transaction_id = transaction_id
+    else:
+        print ("You are not authenticated")
     return JsonResponse('Payment complete!', safe=False)
