@@ -30,7 +30,7 @@
     <div class="box-element hidden" id="payment-info">
       <small>Payment Options</small>
       <button id="make-payment">Pay Now!</button>
-      <button id="make-payment">Pay on delivery</button>
+      <button id="later-payment">Pay on delivery</button>
     </div>
 
   </div>
@@ -113,8 +113,27 @@
       userFormData.email = form.email.value
     }
 
-    console.log('Shipping Info:', shippingInfo)
-    consolelog('User Info:', userFormdata)
+    var url = '/process_order/'
+    fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CsrfToken': csrftoken,
+        },
+        body: JSON.stringify({
+          'form': userFormData,
+          'shipping': shippingInfo
+        }),
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Success:', data);
+        alert('Transaction completed');
+        window.location.href = "{% url 'store' %}"
+      })
+
+    // console.log('Shipping Info:', shippingInfo)
+    // consolelog('User Info:', userFormdata)
   }
 </script>
 
