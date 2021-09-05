@@ -87,6 +87,11 @@ def processOrder(request):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         total = float(data['form']['total'])
         order.transaction_id = transaction_id
+        
+        if total == order.get_cart_total:
+            order.complete = True
+        order.save()
+        
     else:
         print ("You are not authenticated")
     return JsonResponse('Payment complete!', safe=False)
