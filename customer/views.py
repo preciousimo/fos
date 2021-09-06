@@ -6,14 +6,17 @@ import datetime
 from .models import*
 from .utils import cookieCart, cartData, guestOrder
 
-def store(request):
+def index(request):
+    return render(request, 'customer/index.html')
+
+def menu(request):
     
     data = cartData(request)
     cartItems = data['cartItems']
 
     products = Product.objects.all()
     context = {'products':products, 'cartItems':cartItems}
-    return render(request, 'customer/store.html', context)
+    return render(request, 'customer/menu.html', context)
 
 def cart(request):
     
