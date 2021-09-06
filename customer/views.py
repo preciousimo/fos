@@ -7,7 +7,22 @@ from .models import*
 from .utils import cookieCart, cartData, guestOrder
 
 def index(request):
-    return render(request, 'customer/index.html')
+    
+    data = cartData(request)
+    cartItems = data['cartItems']
+
+    context = {'cartItems':cartItems}
+    return render(request, 'customer/index.html', context)
+
+
+def about(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
+
+    context = {'cartItems':cartItems}
+     
+    return render(request, 'customer/about.html', context)
+
 
 def menu(request):
     
@@ -91,3 +106,20 @@ def processOrder(request):
         )
             
     return JsonResponse('Payment complete!', safe=False)
+
+def confirmation(request, pk):
+    
+    data = cartData(request)
+    cartItems = data['cartItems']
+    
+    if request.method == 'GET':
+        order =  OrderItem.objects.get(pk=pk)
+
+        context = {
+            'pk': order.pk,
+            'items': order.product.name,
+            'price': order.product.price,
+            'cartItems':cartItems,
+        }
+
+        return render(request, 'customer/confirmation.html', context)
