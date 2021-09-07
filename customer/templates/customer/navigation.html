@@ -1,6 +1,6 @@
 {% load static %}
 
-<nav class="container-fluid navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="{% url 'index' %}">AFOS</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
@@ -17,9 +17,10 @@
 
 
     </ul>
-    <div class="form-inline my-2 my-lg-0">
-      <a href="#" class="btn btn-warning">Login</a>
 
+    <div class="form-inline my-2 my-lg-0">
+      <a class="nav-link" href="{% url 'index' %}"><b>Logout</b><span class="sr-only">(current)</span></a>
+      <a class="nav-link" href="{% url 'add' %}"><b>Login</b><span class="sr-only">(current)</span></a>
       <a href="{% url 'cart' %}">
         <img id="cart-icon" src="{% static 'images/cart.png' %}">
       </a>

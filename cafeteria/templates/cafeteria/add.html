@@ -1,0 +1,30 @@
+{% extends 'cafeteria/main.html' %} {% block content %}
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <form method="POST" id="form_sample_2" class="form-horizontal" novalidate="novalidate" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-body">
+        <div class="form-group m-3">
+          <label>Name</label>
+          <input required name="name" class="form-control" type="text" placeholder="Enter Name of Food">
+        </div>
+        <div class="form-group m-3">
+          <label>Price</label>
+          <input required name="price" class="form-control" type="number" placeholder="Enter Price">
+        </div>
+        <div class="form-group m-3">
+          <label>Upload image</label>
+          <input requiured name="image" class="form-control-file" type="file">
+        </div>
+
+        <div class="form-group">
+          <div class="offset-md-3 col-md-9">
+            <button type="submit" class="btn btn-dark btn-sm">Add</button>
+          </div>
+        </div>
+    </form>
+    </div>
+  </div>
+
+
+  {% endblock content %}
