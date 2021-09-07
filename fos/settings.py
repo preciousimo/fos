@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     
     'customer',
     'cafeteria',
+    
+    'accounts'
 ]
 
 MIDDLEWARE = [
