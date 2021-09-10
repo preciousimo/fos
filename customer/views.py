@@ -1,10 +1,31 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import json
 import datetime
 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+from django.contrib import messages
+
+from .forms import NewUserForm
+from . import forms
+from django.contrib.auth.models import User
+
 from .models import*
 from .utils import cookieCart, cartData, guestOrder
+
+
+def register_request(request):
+    if request.method == "POST":
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            User = form.save()
+            # login(request, u  ser)
+            messages.success(request, "Registration successful." )
+            return redirect("login")
+        messages.error(request, "Unsuccessful registration. Invalid information.")
+    form = NewUserForm()
+    return render (request, 'account/signup.html', context={"register_form":form})
 
 def index(request):
     

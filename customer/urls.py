@@ -1,8 +1,12 @@
-from django.urls import path
-
+from django.urls import path, re_path
+from .views import*
 from . import views
 
+from django.contrib.auth.views import LogoutView
 urlpatterns = [
+    
+    path("account/", views.register_request, name="account"),
+    
 	#Leave as empty string for base url
 	path('', views.index, name="index"),
  	path('menu', views.menu, name="menu"),
