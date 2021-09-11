@@ -19,13 +19,13 @@ def register_request(request):
     if request.method == "POST":
         form = NewUserForm(request.POST)
         if form.is_valid():
-            User = form.save()
-            # login(request, u  ser)
+            user = form.save()
+            login(request, user)
             messages.success(request, "Registration successful." )
             return redirect("login")
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
-    return render (request, 'account/signup.html', context={"register_form":form})
+    return render (request, template_name="registration/register.html", context={"register_form":form})
 
 def index(request):
     

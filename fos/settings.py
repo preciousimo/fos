@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'customer',
     'cafeteria',
     
-    'accounts'
+    'accounts',
+    
+    'crispy_forms',
  
 ]
 

@@ -19,13 +19,32 @@
     </ul>
 
     <div class="form-inline my-2 my-lg-0">
-      <a class="nav-link" href="{% url 'logout' %}"><b>Logout</b><span class="sr-only">(current)</span></a>
-      <a class="nav-link" href="{% url 'login' %}"><b>Login</b><span class="sr-only">(current)</span></a>
-      <a class="nav-link" href="{% url 'signup' %}"><b>Signup</b><span class="sr-only">(current)</span></a>
-      <a href="{% url 'cart' %}">
-        <img id="cart-icon" src="{% static 'images/cart.png' %}">
-      </a>
-      <p id="cart-total">{{cartItems}}</p>
+
+      <ul class="navbar-nav">
+
+        {% if request.user.is_authenticated%}
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline-danger" href="{% url 'logout' %}">Logout</a>
+        </li>
+
+        <li class="form-inline my-2 my-lg-0">
+          <a href="{% url 'cart' %}">
+            <img id="cart-icon" src="{% static 'images/cart.png' %}">
+          </a>
+          <p id="cart-total">{{cartItems}}</p>
+        </li>
+
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline-success" href="{% url 'login' %}">Login</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline-success" href="{% url 'signup' %}">Sign Up</a>
+        </li>
+
+        {% endif %}
+      </ul>
 
     </div>
   </div>
